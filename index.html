@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List Project</title>
+    <style>
+        html,body{
+            height:100%;
+            background-color: rgb(69, 118, 245);
+        }
+        h1{
+            text-align: center;
+            font-family:'Courier New', Courier, monospace;
+            font-size: 40px;
+            color:rgb(70, 70, 238);
+            text-shadow: rgb(122, 8, 111);
+            animation:glow 2s infinite;
+            transform:scale(2,1.5);
+            text-shadow: 3px 3px rgb(69, 68, 68);
+        }
+        @keyframes glow{
+            00%{
+                color:rgb(159, 8, 58);
+            }
+            10%{
+                color: rgb(243, 18, 93);
+            }
+            20%{
+                color:rgb(196, 11, 199);
+            }
+            40%{
+                color:rgb(7, 61, 124);
+            }
+            50%{
+                color: rgb(214, 21, 195);
+            }
+            60%{
+                color:rgb(13, 153, 218);
+            }
+            70%{
+                color: rgb(99, 6, 107);
+            }
+            80%{
+                color: rgb(11, 7, 248);
+            }
+            90%{
+                color: rgb(208, 38, 95);
+            }
+            100%{
+                color: rgb(174, 15, 158);
+            }
+        }
+        .To-Do{
+            display:grid;
+            place-content: center;
+            background-color: whitesmoke;
+            border:rgb(200, 194, 194) 20px double;
+            border-radius: 5px;
+            min-height:50%;
+            width:45%;
+            align-items: center;
+            transform: translateX(50%) translateY(100px);
+            padding:10px;
+        }
+        #newtask input{
+            min-height:50px;
+            width:auto;
+            border:rgb(196, 192, 192) 3px solid;
+            border-radius: 10px;
+            font-size: larger;
+            font-weight: bolder;
+            color:rgb(3, 3, 57);
+            text-overflow: ellipsis;
+            text-align: center;
+            position: relative;
+            align-self: center;
+            margin:10px;
+        }
+        #newtask input:active{
+            border-color: rgb(54, 54, 216);
+            border-radius: 10px;
+        }
+        #newtask button{
+            min-height:50px;
+            width:70px;
+            background-color: rgb(6, 6, 82);
+            border: rgb(54, 54, 216) 3px solid;
+            border-radius: 10px;
+            color: rgb(209, 166, 57);
+            text-align: center;
+            cursor:cursor;
+            align-self: center;
+        }
+        .task{
+            display:flex;
+            position:relative;
+            margin: 10px;
+        }
+        #taskname{
+            min-height:auto;
+            width:auto;
+            background-color:rgb(41, 41, 212);
+            border: rgb(10, 10, 170) 3px solid;
+            border-radius: 10px;
+            font-size: large;
+            color:goldenrod;
+            text-overflow:initial;
+            text-align: center;
+            margin:5px;
+            padding:10px;
+        }
+        .delete{
+            min-height:50px;
+            width:70px;
+            background-color: rgb(8, 8, 146);
+            border: rgb(54, 54, 216) 3px solid;
+            border-radius: 10px;
+            color: rgb(146, 144, 142);
+            text-align: center;
+            cursor:cursor;
+            align-self: center;
+            margin:5px;
+        }
+        .styling{
+            align-content: start;
+        }
+        #colorChange{
+            border: rgb(92, 92, 254) 5px solid;
+            background-color:rgb(43, 43, 213);
+            border-radius: 3px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <input class="styling" type="color" id="colorChanger">
+    <button class="styling" id="colorChange">Change the color of Background</button>
+    <h1>A To-Do List Project</h1>
+    <div class="To-Do">
+        <div id="newtask">
+            <input type="text" placeholder="Enter your tasks">
+            <button id="push">Add</button>
+        </div>
+        <div id="print"></div>
+    </div>
+    <script>
+        document.querySelector("#colorChange").onclick=function(){
+            const Color=document.getElementById("colorChanger").value;
+            document.body.style.backgroundColor=Color;
+        }
+        document.querySelector("#push").onclick =function(){
+            if(document.querySelector("#newtask input").value.length==0){
+                alert("Please enter a task name!");
+            }
+            else{
+                document.querySelector("#print").innerHTML+=`
+                <div class="task">
+                    <span id="taskname">
+                        ${document.querySelector("#newtask input").value}
+                    </span>
+                    <button class="delete">
+                        <i class="fas fa-trash-alt"></i> Delete
+                    </button>
+                </div>
+            `;
+            var delete_list = document.querySelectorAll(".delete")
+            for(var i=0;i<delete_list.length;i++){
+                delete_list[i].onclick=function(){
+                    this.parentNode.remove();
+                }
+            }
+        }
+    }
+    </script>
+</body>
+</html>
